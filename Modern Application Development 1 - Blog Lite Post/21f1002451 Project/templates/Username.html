@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+form {
+        margin: 0;
+        display: inline-block;
+        text-align: center;
+        }
+.row{
+    display: inline-block;
+}
+img{
+    text-align: center;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+</style>
+    <h2 class = "text-center"> Profile </h2>
+    <div class="jumbotron">
+        <span class = "text-center" >
+        <div class="content-section" >
+        <div class="media center">
+            <img class="rounded-circle account-img" src="{{  url_for('static', filename='profile_pics/' + user.profile_pic) }}" style="width:200px;height:200px;" alt="">
+        </div>
+    </div>
+            {% if user_follow >= 2 %}
+            <h1> User: {{ user.username }} &#9733;  </h1>
+
+        {% else %}
+        <h1>User: {{ user.username }}</h1>
+
+        {% endif %}
+            <h3>Posts: {{ post_count }}</h3>
+            <h3><a href="{{ url_for("follower",username = user.username) }}"> Followers:</a> {{ user.followers.count() }} </h3>
+            <h3><a href="{{ url_for("following",username=user.username) }}">Following: </a> {{ user.followed.count() }} </h3>
+
+
+        {% if user != current_user %}
+        {% if not current_user.is_following(user) %}
+            <form action="{{ url_for('follow', username=user.username) }}" method="post" style="text-align: center;">
+                {{ form1.hidden_tag() }}
+                {{ form1.submit(class="btn btn-primary") }}
+            </form>
+        {% else %}
+            <form action="{{ url_for('unfollow', username=user.username) }}" method="post" style="text-align: center;">
+                {{ form2.hidden_tag() }}
+                {{ form2.submit(class="btn btn-secondary") }}
+            </form>
+            {% endif %}
+            {% endif %}
+
+
+         {% if user == current_user %}
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#del_modal">Delete</button>
+                <form action="{{ url_for('update_account') }}" method="POST">
+            <input class="btn btn-primary" type="submit" value="Update">
+                </form>
+
+            {% endif %}
+        </span>
+<div class="modal" tabindex="-1" role="dialog" id="del_modal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Delete Account </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete your account?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+          <form action="{{ url_for('delete_account') }}" method="POST">
+            <input class="btn btn-danger" type="submit" value="Delete">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+    <div class="jumbotron">
+    <h4>Posts</h4>
+
+        {% for posts in post %}
+
+
+             <div class="row">
+  <div class="col-sm-6">
+  <div class="card" style="width: 21rem; height: auto">
+
+
+   <img class="card-img-top" src="{{  url_for('static', filename='post_pics/' + posts.pic) }}" style="width:75px;height:75px;" alt="">
+  <div class="card-body">
+  <h5 class="card-title">{{ posts.title }}</h5>
+    <p class="card-text">{{ posts.text }}</p>
+           {% if user == current_user %}
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#del_modal1">Delete</button>
+                <form action="{{ url_for('update_post',post_id=posts.id) }}" method="POST">
+            <input class="btn btn-primary" type="submit" value="Update">
+                </form>
+
+            {% endif %}
+
+<div class="modal" tabindex="-1" role="dialog" id="del_modal1">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Delete Post </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete your post?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+          <form action="{{ url_for('delete_post',post_id=posts.id) }}" method="POST">
+            <input class="btn btn-danger" type="submit" value="Delete">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="card-body">
+      {% for use in userall %}
+          {% if posts.user_id == use.id and use.id != current_user.id %}
+              <p>Posted by:<a href="{{ url_for('usernames',username = use.username) }}" class="card-link">{{ use.username }}</a></p>
+          {% endif %}
+          {% endfor %}
+    </div>
+  </div>
+  </div>
+  </div>
+
+
+</div>
+     {% endfor %}
+        </div>
+
+{% endblock %}

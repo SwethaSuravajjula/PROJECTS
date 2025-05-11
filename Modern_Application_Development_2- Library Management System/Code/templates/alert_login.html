@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Reminder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        p {
+            color: #666;
+        }
+
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        table th {
+            background-color: #f2f2f2;
+        }
+
+        td {
+            text-align: left;
+        }
+        td a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        td a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hello, {{ name }}</h1>
+        
+        <p>Please Come and Visit us</p>
+        <p>We've observed that you have not logged in for today. You are missing out on new books and updates.</p>
+        
+        <h2>New Books Created Today:</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Book Name</th>
+                    <th>Authors</th>
+                    <th>Section</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in new_books_created %}
+                    <tr>
+                        <td>{{ book.name }}</td>
+                        <td>{{ book.authors }}</td>
+                        <td>{{ book.section.name }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <p><a href="http://localhost:8080">Hurry Up! Get your fav book!</a></p>
+    </div>
+</body>
+</html>

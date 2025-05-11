@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Book is Overdue</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        h2 {
+            margin-top: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Dear {{ name }},</h2>
+    
+    <p>This is to inform you that the book "{{ temp['issue_name'] }}\'s access is revoked as you have exceeded the due-date of this book.</p>
+    
+    
+    <p><a href="http://localhost:8080">Login for readin'!</a></p>
+    
+    <p>Thank you!</p>
+</body>
+</html>

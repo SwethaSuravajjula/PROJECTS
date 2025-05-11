@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <style>
+
+.drive{
+    text-align: center;
+}
+
+    </style>
+
+</head>
+<body>
+<div class="jumbotron" >
+<h1>Blog Lite </h1>
+</div>
+
+    <div class="jumbotron" class="drive" style="margin-left: 50px!important; margin-right: 50px!important;">
+        <h2 class="drive">Welcome!</h2>
+        <br>
+         <form class="drive" method="post">
+    {{ form.hidden_tag() }}
+    <h4 >{{ form.Username.label }}:  {{form.Username(placeholder="username")  }}</h4>
+        <br>
+        <h4>{{ form.Password.label }}: {{ form.Password(placeholder="password") }}</h4>
+        <br>
+        <h4>{{ form.submit(class="btn btn-primary") }}<br></h4>
+
+        <h4><a href="{{ url_for('signup') }}">Create_Account</a></h4>
+    </form>
+    </div>
+</body>
+</html>

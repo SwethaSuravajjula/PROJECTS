@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+    <style>
+    .jumbotron {
+      background-size: cover;
+      padding-top: 10%;
+      padding-bottom: 20%;
+    }
+    </style>
+    <br>
+<div style="text-align:center",class="card">
+<div class="jumbotron">
+<h2 class="text-center"> {{ title }} Post </h2>
+<form method="Post" enctype="multipart/form-data",action="#">
+    {{ form.hidden_tag() }}
+    <div class="form-outline mb-4" >
+        {{ form.name.label }}
+        {{ form.name(class="form-control") }}
+    </div>
+    <div class="form-group",class="card-body">
+        {{ form.caption.label }}
+       {{ form.caption(class="form-control",size=30000) }}
+    </div>
+<br>
+    <div class="form-group">
+            {{ form.picture.label }}
+            {{ form.picture(class="form-file") }}
+            {% if form.picture.errors %}
+            {% for error in form.picture.errors %}
+                <span class="'text-danger">{{ error }}</span>
+            {% endfor %}
+        {% endif %}
+        </div>
+
+        <br>
+    {{ form.submit(class_="btn btn-success") }}
+</form>
+</div>
+</div>
+    </div>
+{% endblock %}

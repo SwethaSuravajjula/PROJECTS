@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+ <style>
+    .jumbotron {
+      background-size: cover;
+      padding-top: 10%;
+      padding-bottom: 20%;
+    }
+    </style>
+    <br>
+<div style="text-align:center",class="card">
+<div class="jumbotron">
+<h2 class="text-center"> Update Account </h2>
+    <br>
+<form  method="post" enctype="multipart/form-data",action="#">
+    {{ form.hidden_tag() }}
+    <div class="form-outline mb-4" >
+        <h4>{{ form.Username.label }}{{ form.Username(value=name,style="background-color:#d3d3d3 ;") }}</h4><br>
+    </div>
+    <div class="form-group">
+            {{ form.image.label }}
+            {{ form.image(class="form-file") }}
+        </div>
+<div>
+{{ form.submit(class="btn btn-success") }}
+</div>
+</form>
+</div>
+</div>
+{% endblock %}

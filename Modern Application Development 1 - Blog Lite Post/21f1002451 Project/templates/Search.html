@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+    <style>
+    form{
+        display: inline-block;
+    }
+    .jumbotron{
+         background-size: cover;
+      padding-top: 0%;
+      padding-bottom: 50%;
+    }
+    </style>
+    <br>
+    <div class="jumbotron">
+    <form method="POST">
+    {{ form.hidden_tag() }}
+        <h3>{{ form.name.label }}{{ form.name() }}
+            {{ form.submit(class="btn btn-primary") }}</h3>
+    </form>
+    <h3>People you might want to follow:</h3>
+    {% for user in users %}
+
+        {% if user != current_user %}
+        {% if not current_user.is_following(user)  %}
+            <li><img class="rounded-circle account-img" src="{{  url_for('static', filename='profile_pics/' + user.profile_pic) }}" style="width:50px;height:50px;" alt=""> <a href="{{ url_for('usernames',username=user.username)}}" style="color:red;">{{ user.username }}</a>
+            <form action="{{ url_for('follow', username=user.username) }}" method="post">
+                {{ form1.hidden_tag() }}
+                {{ form1.submit(class="btn btn-primary") }}
+            </form></li>
+        {% else %}
+        <li><img class="rounded-circle account-img" src="{{  url_for('static', filename='profile_pics/' + user.profile_pic) }}" style="width:50px;height:50px;" alt=""> <a href="{{ url_for('usernames',username=user.username)}}" style="color: red;">{{ user.username }}</a>
+            <form action="{{ url_for('unfollow', username=user.username) }}" method="post">
+                {{ form2.hidden_tag() }}
+                {{ form2.submit(class="btn btn-secondary") }}
+            </form></li>
+
+        {% endif %}
+        {% endif %}
+        <br>
+    {% endfor %}
+    </div>
+{% endblock %}

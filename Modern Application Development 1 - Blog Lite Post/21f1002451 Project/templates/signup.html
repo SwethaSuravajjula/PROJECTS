@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up </title>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+     <style>
+
+
+.drive{
+    text-align: center;
+}
+
+    </style>
+</head>
+<body>
+<div class="jumbotron" >
+<h1>Blog Lite </h1>
+</div>
+<div class="jumbotron" class="drive" style="margin-left: 50px!important; margin-right: 50px!important;">
+
+<h1 class="drive">Create your Account</h1>
+<br>
+    <form method ='post' class="drive">
+    {{ form.hidden_tag() }}
+        <h4 class="drive">{{ form.Username.label }}: {{ form.Username(placeholder="Username") }}</h4>
+        <br>
+        <h4 class="drive">{{ form.Password.label }}: {{ form.Password(placeholder="Password") }}</h4>
+        <br>
+        <h4 class="drive">{{ form.pass_confirm.label }}: {{ form.pass_confirm(placeholder="Confirm Password") }}</h4>
+        <br>
+        <h4 class="drive">{{ form.submit(class="btn btn-primary") }}</h4>
+
+    </form>
+</div>
+</body>
+</html>
